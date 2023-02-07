@@ -1,0 +1,16 @@
+EasyDict==1.7
+shapely
+Cython
+scipy
+pandas
+pyyaml
+json_tricks
+scikit-image
+yacs>=0.1.5
+tensorboardX>=1.6
+tqdm~=4.64.1
+ninja
+
+numpy~=1.21.6
+pillow~=9.4.0
+torchvision~=0.3.0

@@ -56,7 +56,7 @@ def main():
     cudnn.enabled = config.CUDNN.ENABLED
 
     # build model
-    model = model = models.pidnet.get_seg_model(config, imgnet_pretrained=True)
+    model = models.pidnet.get_seg_model(config, imgnet_pretrained=True)
 
     if config.TEST.MODEL_FILE:
         model_state_file = config.TEST.MODEL_FILE
@@ -65,7 +65,7 @@ def main():
    
     logger.info('=> loading model from {}'.format(model_state_file))
         
-    pretrained_dict = torch.load(model_state_file)
+    pretrained_dict = torch.load(model_state_file,  map_location=torch.device('cpu'))
     if 'state_dict' in pretrained_dict:
         pretrained_dict = pretrained_dict['state_dict']
     model_dict = model.state_dict()
@@ -77,7 +77,7 @@ def main():
     model_dict.update(pretrained_dict)
     model.load_state_dict(model_dict)
 
-    model = model.cuda()
+    # model = model.cuda()
 
     # prepare data
     test_size = (config.TEST.IMAGE_SIZE[1], config.TEST.IMAGE_SIZE[0])

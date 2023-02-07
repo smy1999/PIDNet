@@ -1,0 +1,6 @@
+.idea
+*.pt
+*.png
+data/**/*.json
+pretrained_models
+output
