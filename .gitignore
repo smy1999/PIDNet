@@ -1,0 +1,6 @@
+.idea
+**.pt
+**.tar
+output
+data/cityscapes/gtFine
+data/cityscapes/leftImg8bit
