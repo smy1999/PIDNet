@@ -77,17 +77,19 @@ if __name__ == '__main__':
     sv_path = args.r+'outputs/'
     
     model = models.pidnet.get_pred_model(args.a, 19 if args.c else 11)
-    model = load_pretrained(model, args.p).cuda()
+    model = load_pretrained(model, args.p)
+    # model = load_pretrained(model, args.p).cuda()
     model.eval()
     with torch.no_grad():
         for img_path in images_list:
-            img_name = img_path.split("\\")[-1]
+            img_name = img_path.split("/")[-1]
             img = cv2.imread(os.path.join(args.r, img_name),
                                cv2.IMREAD_COLOR)
             sv_img = np.zeros_like(img).astype(np.uint8)
             img = input_transform(img)
             img = img.transpose((2, 0, 1)).copy()
-            img = torch.from_numpy(img).unsqueeze(0).cuda()
+            # img = torch.from_numpy(img).unsqueeze(0).cuda()
+            img = torch.from_numpy(img).unsqueeze(0)
             pred = model(img)
             pred = F.interpolate(pred, size=img.size()[-2:], 
                                  mode='bilinear', align_corners=True)
